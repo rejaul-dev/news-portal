@@ -1,56 +1,36 @@
-const loadAllNewsCategory = async () => {
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/news/categories"
-  );
-  const data = await res.json();
-  displayAllNewsCategory(data.data.news_category);
-};
-
-loadAllNewsCategory();
-
-
-
-const displayAllNewsCategory = (category) => {
-  const navMenu = document.getElementById("nav-menu");
-  category.forEach((category) => {
-    const ul = document.createElement("li");
-    ul.innerHTML = `
-        <li>${category.category_name}</li>
-        `;
-    navMenu.appendChild(ul);
-  });
-};
-
-const loadNewsInCategory = async () => {
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/news/category/01"
-  );
-  const data = await res.json();
-  displayNewsInCategory(data.data);
-};
-
-const displayNewsInCategory = (news) => {
-//   console.log(news);
-    const cardContainer = document.getElementById("card-container");
-    news.forEach(news => {
-        const newsDiv = document.createElement('div');
-        newsDiv.innerHTML = `
-        <div class="card card-side shadow-xl mt-12 p-4">
-              <img src="${news.thumbnail_url}" alt="Movie" />
-            <div class="card-body">
-              <h2 class="card-title">${news.title}</h2>
-              <p>${news.details}</p>
-              <div class="card-actions justify-end">
-                <p>${news.author.name}</p>
-                <button class="btn btn-primary">Watch</button>
-              </div>
-            </div>
-          </div>
-        `;
-        cardContainer.appendChild(newsDiv);
-    })
+const loadAllCategory = async () => {
+      const response = await fetch(
+        "https://openapi.programming-hero.com/api/news/categories"
+    );
+    const data = await response.json();
+    return data.data.news_category;
     
-};
+}
 
-loadNewsInCategory();
+const setAllMenu = async () => {
+    const data = await loadAllCategory();
 
+    const menu = document.getElementById("all-category");
+    
+    for (const categories of data) {
+
+        // console.log(categories.category_name);
+
+        const ul = document.createElement("ul");
+        ul.classList.add('nav');
+        ul.innerHTML = `
+        <li class="nav-item">
+        <a class="nav-link"href="#">${categories.category_name}</a>
+        </li>
+    
+    
+    `;
+        menu.appendChild(ul)
+    }
+    
+
+   
+}
+
+// loadAllCategory()
+setAllMenu(); 
