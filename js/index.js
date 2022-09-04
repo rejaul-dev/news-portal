@@ -4,12 +4,12 @@ const loadCategories = async () => {
   );
   try {
     const data = await response.json();
-    displayCategories(data.data.news_category); 
+    displayCategories(data.data.news_category);
   }
   catch (error) {
     console.loh(error);
   }
-  
+
 
 };
 
@@ -37,10 +37,11 @@ const loadCategoryDetails = async (category_id) => {
   catch {
     console.log(error);
   }
-  
+
 };
 
 const displayCategoryDetails = async (details) => {
+
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
   details.forEach((details) => {
@@ -52,13 +53,48 @@ const displayCategoryDetails = async (details) => {
             <div class="card-body">
               <h5 class="card-title fw-bold">${details.title.slice(0, 50)}...</h5>
               <p class="card-text">${details.details.slice(0, 120)}...</p>
+              <button onclick="loadNewsDetails('${details._id}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
             </div>
           </div>
         </div>
         `;
     cardContainer.appendChild(detailDiv);
   });
+
 };
+
+// loading start
+// toggleSpinner(true);
+// stop loader
+const toggleSpinner = isLoading => {
+  const loaderSection = document.getElementById('loader')
+  if (isLoading) {
+    loaderSection.classList.remove('d-none')
+  }
+}
+
+
+const loadNewsDetails = async news_id => {
+  const url = `https://openapi.programming-hero.com/api/news/${news_id}`
+  const response = await fetch(url);
+  const data = await response.json();
+  displayNewsDetails(data.data[0]);
+}
+
+const displayNewsDetails = news => {
+  console.log(news);
+  const modalTitle = document.getElementById('newsDetailModalLabel');
+  modalTitle.innerText = news.title;
+  const newsDetails = document.getElementById('news-details');
+  newsDetails.innerHTML = `
+  <p>Author Name: ${news.author.name}</p>
+  <p>Publish Date: ${news.author.published_date}</p>
+  
+  
+  `
+}
+
+
 
 loadCategoryDetails('08');
 loadCategories();
