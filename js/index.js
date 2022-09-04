@@ -53,7 +53,12 @@ const displayCategoryDetails = async (details) => {
             <div class="card-body">
               <h5 class="card-title fw-bold">${details.title.slice(0, 50)}...</h5>
               <p class="card-text">${details.details.slice(0, 120)}...</p>
-              <button onclick="loadNewsDetails('${details._id}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
+              
+              <div class="d-flex justify-content-between align-items-center">
+                  <img style="height: 50px; width:50px;" src="${details.author.img ? details.author.img : "no data found"}" alt="">
+                  <p class="fw-bold" >View: ${details.total_view ? details.total_view :'no data found'}</p>
+                  <button onclick="loadNewsDetails('${details._id}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
+              </div>
             </div>
           </div>
         </div>
@@ -87,10 +92,10 @@ const displayNewsDetails = news => {
   modalTitle.innerText = news.title;
   const newsDetails = document.getElementById('news-details');
   newsDetails.innerHTML = `
-  <img class="rounded xl" style="height:50px; weight:50px;" src="${news.author.img}" alt="">
-  <p>Author Name: ${news.author.name ? news.author.name : 'author name not found' }</p>
+  <img style="height:50px; weight:50px;" src="${news.author.img}" alt="">
+  <p>Author Name: ${news.author.name ? news.author.name : 'no data found' }</p>
   <p>Publish Date: ${news.author.published_date}</p>
-  <p class="fw-bold">Total View: ${news.total_view ? news.total_view : 'no view yet'}</p>
+  <p class="fw-bold">Total View: ${news.total_view ? news.total_view : 'no data found'}</p>
   
   `
 }
