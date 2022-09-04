@@ -48,14 +48,17 @@ const displayCategoryDetails = async (details) => {
     const detailDiv = document.createElement("div");
     detailDiv.innerHTML = `
        <div class="col shadow-lg rounded-xl">
-          <div class="card p-4">
+          <div class="card p-2">
             <img src="${details.thumbnail_url}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title fw-bold">${details.title.slice(0, 50)}...</h5>
               <p class="card-text">${details.details.slice(0, 120)}...</p>
               
               <div class="d-flex justify-content-between align-items-center">
-                  <img style="height: 50px; width:50px;" src="${details.author.img ? details.author.img : "no data found"}" alt="">
+                  <div>
+                  <img style="height: 35px; width:35px;" src="${details.author.img ? details.author.img : "no data found"}" alt="">
+                  <p class="fs-6">${details.author.name ? details.author.name : 'no data found'}</p>
+                  </div>
                   <p class="fw-bold" >View: ${details.total_view ? details.total_view :'no data found'}</p>
                   <button onclick="loadNewsDetails('${details._id}')" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Show Details</button>
               </div>
