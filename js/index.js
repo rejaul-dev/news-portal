@@ -90,9 +90,7 @@ const displayNewsDetails = news => {
   <img class="rounded xl" style="height:50px; weight:50px;" src="${news.author.img}" alt="">
   <p>Author Name: ${news.author.name ? news.author.name : 'author name not found' }</p>
   <p>Publish Date: ${news.author.published_date}</p>
-  <p class="fw-bold">Total View: ${news.total_view ? news.total_view :'no view yet'}</p>
-
-  
+  <p class="fw-bold">Total View: ${news.total_view ? news.total_view : 'no view yet'}</p>
   
   `
 }
