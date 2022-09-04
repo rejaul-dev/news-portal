@@ -47,7 +47,7 @@ const displayCategoryDetails = async (details) => {
   details.forEach((details) => {
     const detailDiv = document.createElement("div");
     detailDiv.innerHTML = `
-       <div class="col">
+       <div class="col shadow-lg rounded-xl">
           <div class="card p-4">
             <img src="${details.thumbnail_url}" class="card-img-top" alt="...">
             <div class="card-body">
